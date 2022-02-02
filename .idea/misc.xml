@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/add_button_bg.xml" value="0.3435" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/custom_button.xml" value="0.205" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/dialog_bg.xml" value="0.205" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/edit_text_custom.xml" value="0.205" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/ic_baseline_live_tvshows.xml" value="0.335" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.309" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/input_dialog.xml" value="0.205" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/item_selector.xml" value="0.1005" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/nav_bar_rounded.xml" value="0.192" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/search_edit_text.xml" value="0.309" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/activity_splash_screen.xml" value="0.3625" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/card.xml" value="0.3328125" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/fragment_movies.xml" value="0.3328125" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/fragment_music.xml" value="0.3328125" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/fragment_search.xml" value="0.3328125" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/fragment_tv_shows.xml" value="0.3328125" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/input_dialog.xml" value="0.5" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/menu/items_menu.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
