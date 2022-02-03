@@ -11,9 +11,7 @@ import java.io.IOException;
 
 
 public class getResourceData {
-    String header;
-    String body;
-    Bitmap image;
+    JSONObject responseJSON;
 
     public getResourceData(String url) throws IOException {
         String request_url = String.format("https://www.youtube.com/oembed?url=%s&format=json",url);
@@ -23,7 +21,7 @@ public class getResourceData {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
-            JSONObject response = getJsonFromUrl(request_url);
+            responseJSON = getJsonFromUrl(request_url);
         }
     }
 

@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     Button submitButton;
     String inputUrl = "";
+    String spinnerSelection = "";
     AlertDialog dialog;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +83,19 @@ public class MainActivity extends AppCompatActivity {
         View view = layoutInflater.inflate(R.layout.input_dialog, null);
         builder.setView(view);
 
+        spinner = view.findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.spinner_dropdown_item, R.id.spinner_text_view_1,
+                getResources().getStringArray(R.array.types));
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setPrompt("Choose the type of entry");
+
         editText = view.findViewById(R.id.input_url);
         submitButton = view.findViewById(R.id.submit_new_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                spinnerSelection = spinner.getSelectedItem().toString();
                 String inputText = editText.getText().toString();
                 if(!inputText.equals("")){
                     inputUrl = inputText;
@@ -101,4 +113,7 @@ public class MainActivity extends AppCompatActivity {
         dialog = builder.create();
         dialog.show();
     }
+
+
+
 }

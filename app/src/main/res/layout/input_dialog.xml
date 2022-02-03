@@ -30,20 +30,43 @@
         android:fontFamily="@font/poppins_light"
         android:hint="Enter url here"
         android:padding="10dp"
+        android:textColor="@color/background"
         android:textColorHint="@color/gray"
-        android:textColor="@color/gray"
         android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/spinner_prompt_text"
+        android:layout_below="@id/input_url"
+        android:layout_marginHorizontal="30dp"
+        android:text="Choose type below:"
+        android:textColor="@color/background"
+        android:fontFamily="@font/poppins_light"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:popupBackground="@color/background"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_prompt_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="20dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_new_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/input_url"
+        android:layout_below="@+id/spinner"
         android:paddingHorizontal="50dp"
         android:layout_centerHorizontal="true"
         android:text="Submit"
         android:textColor="@color/white"
         android:layout_marginBottom="30dp"
         android:background="@drawable/custom_button"/>
+
 
 </RelativeLayout>
