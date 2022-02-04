@@ -13,7 +13,7 @@ import java.io.IOException;
 public class getResourceData {
     JSONObject responseJSON;
 
-    public getResourceData(String url) throws IOException {
+    public getResourceData(String url) throws IOException, JSONException {
         String request_url = String.format("https://www.youtube.com/oembed?url=%s&format=json",url);
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
@@ -25,10 +25,11 @@ public class getResourceData {
         }
     }
 
-    public JSONObject getJsonFromUrl(String url_request) throws IOException {
+    public JSONObject getJsonFromUrl(String url_request) throws IOException, JSONException {
         okHttpParser httpParser = new okHttpParser();
         String response = httpParser.run(url_request);
+        JSONObject object = new JSONObject(response);
         Log.d("json_data", response);
-        return  null;
+        return  object;
     }
 }

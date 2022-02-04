@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,10 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -29,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment = new MoviesFragment();
     EditText editText;
     Button submitButton;
-    String inputUrl = "";
-    String spinnerSelection = "";
     AlertDialog dialog;
     Spinner spinner;
+    CardData[] cardDataList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.add_new_element:
-//                        Toast.makeText(MainActivity.this, "This is for adding an element", Toast.LENGTH_SHORT).show();
                         openDialog();
-                        break;
+                        return false; //this is to keep the current bottom navigation item high-lighted and not the '+' button
 
                     case R.id.movies_list:
                         fragment = new MoviesFragment();
@@ -95,17 +93,12 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spinnerSelection = spinner.getSelectedItem().toString();
-                String inputText = editText.getText().toString();
-                if(!inputText.equals("")){
-                    inputUrl = inputText;
-                }
+                String spinnerSelection = spinner.getSelectedItem().toString();
+                String inputUrl = editText.getText().toString();
                 dialog.dismiss();
-                Log.d("url_data", inputUrl);
                 try {
-                    getResourceData resourceData = new getResourceData(inputUrl);
-
-                } catch (IOException e) {
+                    parseUserInput(inputUrl, spinnerSelection);
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -114,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-
-
+    private void parseUserInput(String inputUrl, String spinnerSelection) throws IOException, JSONException {
+        if(!inputUrl.equals("")){
+            getResourceData resourceData = new getResourceData(inputUrl);
+            String title = resourceData.responseJSON.getString("title");
+            String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
+            Log.d("thum_url", thumbnail_url);
+        }
+    }
 }

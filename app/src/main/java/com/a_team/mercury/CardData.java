@@ -1,22 +1,21 @@
 package com.a_team.mercury;
 
-public class MovieData {
-    private String name;
+public class CardData {
+    private String title;
     private String url;
     private String body;
 
-    public MovieData(String name, String url, String body) {
-        this.name = name;
+    public CardData(String title, String url) {
+        this.title = title;
         this.url = url;
-        this.body = body;
     }
 
     public String getName() {
-        return name;
+        return title;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.title = name;
     }
 
     public String getUrl() {

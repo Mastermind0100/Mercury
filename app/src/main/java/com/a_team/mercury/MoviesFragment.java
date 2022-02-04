@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class MoviesFragment extends Fragment {
 
@@ -42,20 +41,20 @@ public class MoviesFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
-        MovieData[] movieData = new MovieData[]{
-                new MovieData("Tangled", "youtbe.com", "lfbwfejbwef"),
-                new MovieData("Weathering With You", "youtbe.com", "2of2fn2f"),
-                new MovieData("Harry Potter", "youtbe.com", "opwfkwopkfewopf"),
-                new MovieData("Tangled", "youtbe.com", "lfbwfejbwef"),
-                new MovieData("Weathering With You", "youtbe.com", "2of2fn2f"),
-                new MovieData("Tangled", "youtbe.com", "lfbwfejbwef"),
-                new MovieData("Weathering With You", "youtbe.com", "2of2fn2f"),
+        CardData[] cardData = new CardData[]{
+                new CardData("Tangled", "youtbe.com"),
+                new CardData("Weathering With You", "youtbe.com"),
+                new CardData("Harry Potter", "youtbe.com"),
+                new CardData("Tangled", "youtbe.com"),
+                new CardData("Weathering With You", "youtbe.com"),
+                new CardData("Tangled", "youtbe.com"),
+                new CardData("Weathering With You", "youtbe.com"),
         };
 
-        MovieDataAdapter movieDataAdapter = new MovieDataAdapter(movieData, getActivity());
+        CardDataAdapter cardDataAdapter = new CardDataAdapter(cardData, getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(movieDataAdapter);
-        Log.d("itemCount", String.valueOf(movieDataAdapter.getItemCount()));
+        recyclerView.setAdapter(cardDataAdapter);
+        Log.d("itemCount", String.valueOf(cardDataAdapter.getItemCount()));
 
     }
 }

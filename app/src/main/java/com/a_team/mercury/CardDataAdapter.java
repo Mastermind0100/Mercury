@@ -12,13 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.ViewHolder>{
+public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHolder>{
 
-    MovieData[] movieData;
+    CardData[] cardData;
     Context context;
 
-    public MovieDataAdapter(MovieData[] movieData, FragmentActivity activity) {
-        this.movieData = movieData;
+    public CardDataAdapter(CardData[] cardData, FragmentActivity activity) {
+        this.cardData = cardData;
         this.context = activity;
     }
 
@@ -33,22 +33,22 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final MovieData movieData = this.movieData[position];
-        holder.textViewName.setText(movieData.getName());
-        holder.textViewBody.setText(movieData.getBody());
+        final CardData cardData = this.cardData[position];
+        holder.textViewName.setText(cardData.getName());
+        holder.textViewBody.setText(cardData.getBody());
 //        holder.imageView.setImageResource(movieData.ge);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, movieData.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, cardData.getName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return movieData.length;
+        return cardData.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
