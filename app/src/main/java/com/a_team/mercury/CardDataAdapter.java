@@ -12,12 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
 public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHolder>{
 
-    CardData[] cardData;
+    List<CardData> cardData;
     Context context;
 
-    public CardDataAdapter(CardData[] cardData, FragmentActivity activity) {
+    public CardDataAdapter(List<CardData> cardData, FragmentActivity activity) {
         this.cardData = cardData;
         this.context = activity;
     }
@@ -33,11 +37,13 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final CardData cardData = this.cardData[position];
+        final CardData cardData = this.cardData.get(position);
         holder.textViewName.setText(cardData.getName());
-        holder.textViewBody.setText(cardData.getBody());
-//        holder.imageView.setImageResource(movieData.ge);
-
+        String type_id = cardData.getType_id();
+        String url = cardData.getUrl();
+        if(type_id.equals("movie")||type_id.equals("tvshow")){
+            Glide.with(holder.itemView).load(url).into(holder.imageView);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +54,7 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return cardData.length;
+        return cardData.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -59,9 +65,9 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.display_image_movie);
-            textViewName = itemView.findViewById(R.id.display_text_movie_name);
-            textViewBody = itemView.findViewById(R.id.display_text_movie_body);
+            imageView = itemView.findViewById(R.id.display_image);
+            textViewName = itemView.findViewById(R.id.display_text_name);
+            textViewBody = itemView.findViewById(R.id.display_text_body);
         }
     }
 }

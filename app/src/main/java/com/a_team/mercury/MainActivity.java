@@ -14,13 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.orhanobut.hawk.Hawk;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Button submitButton;
     AlertDialog dialog;
     Spinner spinner;
-    CardData[] cardDataList;
-
+    List<CardData> cardDataList = new ArrayList<CardData>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         bottomNavigationView.setSelectedItemId(R.id.movies_list);
@@ -86,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getStringArray(R.array.types));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setPrompt("Choose the type of entry");
 
         editText = view.findViewById(R.id.input_url);
         submitButton = view.findViewById(R.id.submit_new_button);
@@ -99,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     parseUserInput(inputUrl, spinnerSelection);
                 } catch (IOException | JSONException e) {
+                    Toast.makeText(MainActivity.this, "Something went wrong. Contact Admin", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -112,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
             getResourceData resourceData = new getResourceData(inputUrl);
             String title = resourceData.responseJSON.getString("title");
             String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
-            Log.d("thum_url", thumbnail_url);
+            cardDataList.add(new CardData(title, thumbnail_url, "movie"));
+            Log.d("thumb_url", thumbnail_url);
         }
     }
 }

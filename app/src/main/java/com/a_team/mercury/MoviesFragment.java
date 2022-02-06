@@ -13,9 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.hawk.Hawk;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MoviesFragment extends Fragment {
 
     RecyclerView recyclerView;
+    List<CardData> all_card_data;
 
     public MoviesFragment() {
     }
@@ -29,6 +37,8 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
+        all_card_data = Hawk.get("all_data");
+        Log.d("all_data_main", all_card_data.toString());
         return view;
     }
 
@@ -41,20 +51,16 @@ public class MoviesFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
-        CardData[] cardData = new CardData[]{
-                new CardData("Tangled", "youtbe.com"),
-                new CardData("Weathering With You", "youtbe.com"),
-                new CardData("Harry Potter", "youtbe.com"),
-                new CardData("Tangled", "youtbe.com"),
-                new CardData("Weathering With You", "youtbe.com"),
-                new CardData("Tangled", "youtbe.com"),
-                new CardData("Weathering With You", "youtbe.com"),
-        };
-
-        CardDataAdapter cardDataAdapter = new CardDataAdapter(cardData, getActivity());
+        List<CardData> movie_cards = new ArrayList<CardData>();
+        for(int i = 0; i < all_card_data.size(); i++) {
+            Log.d("type_ids", all_card_data.get(i).getType_id());
+            if(all_card_data.get(i).getType_id().equals("movie")) {
+                movie_cards.add(all_card_data.get(i));
+            }
+        }
+        CardDataAdapter cardDataAdapter = new CardDataAdapter(movie_cards, getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(cardDataAdapter);
         Log.d("itemCount", String.valueOf(cardDataAdapter.getItemCount()));
-
     }
 }

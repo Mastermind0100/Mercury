@@ -1,13 +1,17 @@
 package com.a_team.mercury;
 
+import android.graphics.Bitmap;
+
 public class CardData {
     private String title;
     private String url;
-    private String body;
+    private String type_id;         //read as user_id from server
 
-    public CardData(String title, String url) {
+
+    public CardData(String title, String url, String type_id) {
         this.title = title;
         this.url = url;
+        this.type_id = type_id;
     }
 
     public String getName() {
@@ -26,11 +30,11 @@ public class CardData {
         this.url = url;
     }
 
-    public String getBody() {
-        return body;
+    public String getType_id() {
+        return type_id;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setType_id(String type_id) {
+        this.type_id = type_id;
     }
 }
