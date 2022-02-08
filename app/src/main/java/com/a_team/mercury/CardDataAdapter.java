@@ -38,16 +38,16 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final CardData cardData = this.cardData.get(position);
-        holder.textViewName.setText(cardData.getName());
+        holder.textViewName.setText(cardData.getTitle());
         String type_id = cardData.getType_id();
-        String url = cardData.getUrl();
+        String url = cardData.getThumbnail_url();
         if(type_id.equals("movie")||type_id.equals("tvshow")){
             Glide.with(holder.itemView).load(url).into(holder.imageView);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, cardData.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, cardData.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
     }

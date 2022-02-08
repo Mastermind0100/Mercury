@@ -36,7 +36,7 @@ public class TvShowsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tv_shows, container, false);
         all_card_data = Hawk.get("all_data");
-        Log.d("all_data_main", all_card_data.toString());
+        Log.d("all_data_tvshows", all_card_data.toString());
         return view;
     }
 

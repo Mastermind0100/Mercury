@@ -14,6 +14,7 @@ public class getResourceData {
     JSONObject responseJSON;
 
     public getResourceData(String url) throws IOException, JSONException {
+
         String request_url = String.format("https://www.youtube.com/oembed?url=%s&format=json",url);
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)

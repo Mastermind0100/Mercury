@@ -59,6 +59,7 @@ public class SplashScreen extends AppCompatActivity {
 
         //Get relevant data and save it in CardData array
         JSONArray jsonarray = all_data_object.getJSONArray("data");
+        Log.d("splashresponse", jsonarray.toString());
         for(int i = 0; i < jsonarray.length(); i++) {
             JSONObject temp_jsonObject = jsonarray.getJSONObject(i);
             String title = temp_jsonObject.getString("title");
@@ -68,9 +69,9 @@ public class SplashScreen extends AppCompatActivity {
             //get the thumbnail url from youtube
             getResourceData resourceData = new getResourceData(url);
             String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
-
+            Log.d("thumb_splash", thumbnail_url);
             //append new object to cardData array
-            CardData cardData = new CardData(title, thumbnail_url, type_id);
+            CardData cardData = new CardData(title, url, thumbnail_url, type_id);
             final_request_data.add(cardData);
         }
 

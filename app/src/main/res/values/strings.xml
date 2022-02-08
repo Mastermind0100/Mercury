@@ -4,7 +4,7 @@
 
     <string-array name="types">
         <item>Movie</item>
-        <item>TV Series</item>
+        <item>TVShow</item>
         <item>Song</item>
     </string-array>
 </resources>

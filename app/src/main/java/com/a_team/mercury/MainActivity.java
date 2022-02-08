@@ -26,6 +26,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import okhttp3.MediaType;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog dialog;
     Spinner spinner;
     List<CardData> cardDataList = new ArrayList<CardData>();
+    String post_request_url = "https://mercury-list-api.herokuapp.com/api/v1/items";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        // Bottom Navigation Handler Code Starts here
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         bottomNavigationView.setSelectedItemId(R.id.movies_list);
-
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        // Bottom Navigation Handler Code ends here
     }
 
     private void openDialog() {
@@ -117,8 +122,24 @@ public class MainActivity extends AppCompatActivity {
             getResourceData resourceData = new getResourceData(inputUrl);
             String title = resourceData.responseJSON.getString("title");
             String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
-            cardDataList.add(new CardData(title, thumbnail_url, "movie"));
+            CardData cardData = new CardData(title, inputUrl, thumbnail_url, spinnerSelection.toLowerCase(Locale.ROOT));
+            cardDataList.add(cardData);
+            updateServerData(cardData);
             Log.d("thumb_url", thumbnail_url);
+            Log.d("spinner_value", spinnerSelection);
         }
+    }
+
+    private void updateServerData(CardData cardData) throws JSONException, IOException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("title", cardData.getTitle());
+        jsonObject.put("url", cardData.getMain_url());
+        jsonObject.put("user_id", cardData.getType_id());
+        okHttpParser httpParser = new okHttpParser();
+        String response = httpParser.post(post_request_url, jsonObject.toString());
+        Log.d("get_response", response);
+        List<CardData> all_data_list = Hawk.get("all_data");
+        all_data_list.add(0, cardData);
+        Hawk.put("all_data", all_data_list);
     }
 }
