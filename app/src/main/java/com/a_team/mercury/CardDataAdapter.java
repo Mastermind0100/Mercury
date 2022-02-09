@@ -47,7 +47,14 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, cardData.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, String.valueOf(cardData.getId()), Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(context, "Wow this was unexpected", Toast.LENGTH_LONG).show();
+                return true;
             }
         });
     }

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             getResourceData resourceData = new getResourceData(inputUrl);
             String title = resourceData.responseJSON.getString("title");
             String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
-            CardData cardData = new CardData(title, inputUrl, thumbnail_url, spinnerSelection.toLowerCase(Locale.ROOT));
+            CardData cardData = new CardData(20022020, title, inputUrl, thumbnail_url, spinnerSelection.toLowerCase(Locale.ROOT));
             cardDataList.add(cardData);
             updateServerData(cardData);
             Log.d("thumb_url", thumbnail_url);
@@ -137,7 +137,11 @@ public class MainActivity extends AppCompatActivity {
         jsonObject.put("user_id", cardData.getType_id());
         okHttpParser httpParser = new okHttpParser();
         String response = httpParser.post(post_request_url, jsonObject.toString());
+        JSONObject response_object = new JSONObject(response);
+        JSONObject response_data_object = response_object.getJSONObject("data");
+        int id = response_data_object.getInt("id");
         Log.d("get_response", response);
+        cardData.setId(id);
         List<CardData> all_data_list = Hawk.get("all_data");
         all_data_list.add(0, cardData);
         Hawk.put("all_data", all_data_list);

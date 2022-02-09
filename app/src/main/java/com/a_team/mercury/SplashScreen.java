@@ -62,6 +62,7 @@ public class SplashScreen extends AppCompatActivity {
         Log.d("splashresponse", jsonarray.toString());
         for(int i = 0; i < jsonarray.length(); i++) {
             JSONObject temp_jsonObject = jsonarray.getJSONObject(i);
+            int id = temp_jsonObject.getInt("id");
             String title = temp_jsonObject.getString("title");
             String url = temp_jsonObject.getString("url");
             String type_id = temp_jsonObject.getString("user_id");
@@ -71,7 +72,7 @@ public class SplashScreen extends AppCompatActivity {
             String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
             Log.d("thumb_splash", thumbnail_url);
             //append new object to cardData array
-            CardData cardData = new CardData(title, url, thumbnail_url, type_id);
+            CardData cardData = new CardData(id, title, url, thumbnail_url, type_id);
             final_request_data.add(cardData);
         }
 
