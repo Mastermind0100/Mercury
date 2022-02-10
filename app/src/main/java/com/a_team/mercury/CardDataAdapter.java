@@ -2,6 +2,8 @@ package com.a_team.mercury;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +56,11 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, String.valueOf(cardData.getId()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, String.valueOf(cardData.getId()), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(cardData.getMain_url()));
+                intent.setPackage("com.google.android.youtube");
+                context.startActivity(intent);
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
