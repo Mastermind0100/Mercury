@@ -33,4 +33,14 @@ public class okHttpParser {
         }
     }
 
+    String delete(String url) throws IOException{
+        Request.Builder builder = new Request.Builder()
+                .url(url)
+                .delete();
+        Request request = builder.build();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
+    }
+
 }

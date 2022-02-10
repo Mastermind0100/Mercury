@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/dialog_bg">
+
+    <TextView
+        android:id="@+id/delete_confirmation_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete this Item?"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/background"/>
+
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/delete_confirmation_text"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/custom_button_red"
+            android:paddingHorizontal="50dp"
+            android:text="Delete"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel_button_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/delete_button"
+            android:background="@drawable/custom_button_white"
+            android:paddingHorizontal="50dp"
+            android:text="Cancel"
+            android:textColor="@color/background" />
+    </LinearLayout>
+
+
+</RelativeLayout>

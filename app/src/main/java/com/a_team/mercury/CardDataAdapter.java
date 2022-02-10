@@ -1,9 +1,12 @@
 package com.a_team.mercury;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,11 +16,15 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.hawk.Hawk;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHolder>{
 
+    AlertDialog dialog;
     List<CardData> cardData;
     Context context;
 
@@ -53,10 +60,58 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(context, "Wow this was unexpected", Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "Wow this was unexpected", Toast.LENGTH_LONG).show();
+                openDialog(cardData);
                 return true;
             }
         });
+    }
+
+    private void openDialog(CardData cardData) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view = layoutInflater.inflate(R.layout.delete_dialog, null);
+        builder.setView(view);
+
+        Button deleteButton = view.findViewById(R.id.delete_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    deleteItem(cardData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        Button cancelButton = view.findViewById(R.id.cancel_button_dialog);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void deleteItem(CardData cardData) throws IOException {
+        List<CardData> cardDataList = Hawk.get("all_data");
+        List<CardData> newCardDataList = new ArrayList<CardData>();
+        for(int i = 0; i < cardDataList.size(); i++) {
+            if(cardDataList.get(i).getId() != cardData.getId()){
+                newCardDataList.add(cardDataList.get(i));
+            }
+        }
+
+        String delete_request = "https://mercury-list-api.herokuapp.com/api/v1/items/%s";
+        okHttpParser httpParser = new okHttpParser();
+        String response = httpParser.delete(String.format(delete_request,String.valueOf(cardData.getId())));
+        Log.d("Delete request", response);
+        Hawk.put("all_data", newCardDataList);
     }
 
     @Override
