@@ -135,7 +135,6 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
             super(itemView);
             imageView = itemView.findViewById(R.id.display_image);
             textViewName = itemView.findViewById(R.id.display_text_name);
-            textViewBody = itemView.findViewById(R.id.display_text_body);
         }
     }
 }

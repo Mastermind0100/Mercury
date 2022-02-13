@@ -20,36 +20,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingLeft="10dp">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/display_text_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_light"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="0.7"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/display_text_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_light"
-                        android:text="Temp Name"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/display_text_body"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Temp body"
-                        android:textColor="@color/gray"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                    android:text="Temp Name"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/display_image"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     android:layout_alignParentRight="true"
                     android:layout_weight="0.3" />
 

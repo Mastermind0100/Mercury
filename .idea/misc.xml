@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/athar/.gradle/caches/transforms-3/410971a562b3dde74de8b60b7524f6fa/transformed/appcompat-1.3.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.3625" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.343" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/add_button_bg.xml" value="0.3435" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/custom_button.xml" value="0.205" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/custom_button_red.xml" value="0.3435" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/edit_text_custom.xml" value="0.205" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/ic_baseline_live_tvshows.xml" value="0.335" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.309" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/ic_launcher_background.xml" value="0.343" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/input_dialog.xml" value="0.205" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/item_selector.xml" value="0.1005" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/drawable/nav_bar_rounded.xml" value="0.192" />
@@ -29,6 +31,7 @@
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/input_dialog.xml" value="0.5" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.3625" />
         <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/menu/items_menu.xml" value="0.33" />
+        <entry key="..\:/Users/athar/AndroidStudioProjects/Mercury/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.114" />
       </map>
     </option>
   </component>
