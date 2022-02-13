@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Mercury</string>
+    <string name="temp_name">Temp Name</string>
+    <string name="thumbnail">Thumbnail</string>
     <!-- TODO: Remove or change this placeholder text -->
 
     <string-array name="types">
