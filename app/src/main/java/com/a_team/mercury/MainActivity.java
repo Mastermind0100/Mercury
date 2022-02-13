@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment fragment = new MoviesFragment();
     EditText editText;
+    EditText titleText;
     Button submitButton;
     AlertDialog dialog;
     Spinner spinner;
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        titleText = view.findViewById(R.id.input_title);
         editText = view.findViewById(R.id.input_url);
         submitButton = view.findViewById(R.id.submit_new_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 String inputUrl = editText.getText().toString();
                 dialog.dismiss();
                 try {
-                    parseUserInput(inputUrl, spinnerSelection);
+                    parseUserInput(titleText.getText().toString(), inputUrl, spinnerSelection);
                 } catch (IOException | JSONException e) {
                     Toast.makeText(MainActivity.this, "Something went wrong. Contact Admin", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -116,10 +118,10 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void parseUserInput(String inputUrl, String spinnerSelection) throws IOException, JSONException {
+    private void parseUserInput(String inputTitleText, String inputUrl, String spinnerSelection) throws IOException, JSONException {
         if(!inputUrl.equals("")){
             getResourceData resourceData = new getResourceData(inputUrl);
-            String title = resourceData.responseJSON.getString("title");
+            String title = inputTitleText;
             String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
             CardData cardData = new CardData(20022020, title, inputUrl, thumbnail_url, spinnerSelection.toLowerCase(Locale.ROOT));
             cardDataList.add(cardData);
