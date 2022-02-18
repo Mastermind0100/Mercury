@@ -120,9 +120,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void parseUserInput(String inputTitleText, String inputUrl, String spinnerSelection) throws IOException, JSONException {
         if(!inputUrl.equals("")){
-            getResourceData resourceData = new getResourceData(inputUrl);
+            String thumbnail_url;
+            if(inputUrl.startsWith("https://youtu.be")){
+                getResourceData resourceData = new getResourceData(inputUrl);
+                thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
+            }
+            else{
+                thumbnail_url = "spotify";
+            }
             String title = inputTitleText;
-            String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
             CardData cardData = new CardData(20022020, title, inputUrl, thumbnail_url, spinnerSelection.toLowerCase(Locale.ROOT));
             cardDataList.add(cardData);
             updateServerData(cardData);

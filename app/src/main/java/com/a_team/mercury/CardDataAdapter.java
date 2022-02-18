@@ -3,6 +3,9 @@ package com.a_team.mercury;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,17 +53,31 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
         holder.textViewName.setText(cardData.getTitle());
         String type_id = cardData.getType_id();
         String url = cardData.getThumbnail_url();
-        if(type_id.equals("movie")||type_id.equals("tvshow")){
+        if(!url.equals("spotify")){
             Glide.with(holder.itemView).load(url).into(holder.imageView);
+        }
+        else{
+            String spotify_url = "https://i.ibb.co/HDSqkTr/spotify-logo-png-7078.png";
+            Glide.with(holder.itemView).load(spotify_url).into(holder.imageView);
+
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(context, String.valueOf(cardData.getId()), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(cardData.getMain_url()));
-                intent.setPackage("com.google.android.youtube");
-                context.startActivity(intent);
+                if(cardData.getMain_url().startsWith("https://youtu.be")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(cardData.getMain_url()));
+                    intent.setPackage("com.google.android.youtube");
+                    context.startActivity(intent);
+                }
+                else{
+                    String getMainUrl = cardData.getMain_url();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(getMainUrl));
+                    intent.putExtra(Intent.EXTRA_REFERRER, Uri.parse("android-app://" + context.getPackageName()));
+                    context.startActivity(intent);
+                }
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
