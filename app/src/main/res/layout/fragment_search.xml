@@ -18,6 +18,36 @@
         android:textAlignment="center"
         android:text="Search" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_text"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:hint="Enter Name"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/background"
+            android:layout_weight="0.85"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_custom"/>
+
+        <ImageButton
+            android:id="@+id/search_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_red"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_baseline_search_24_white"
+            android:layout_weight="0.15"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler_container"
         android:layout_width="match_parent"
