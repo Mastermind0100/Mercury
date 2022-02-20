@@ -40,14 +40,15 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog dialog;
     Spinner spinner;
     List<CardData> cardDataList = new ArrayList<CardData>();
-    String post_request_url = "https://mercury-list-api.herokuapp.com/api/v1/items";
+    String post_request_url = "Enter posy url request string here";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null)
+            getSupportActionBar().hide();
 
         // Bottom Navigation Handler Code Starts here
         bottomNavigationView = findViewById(R.id.bottom_nav_view);

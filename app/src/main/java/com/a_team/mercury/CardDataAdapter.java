@@ -130,7 +130,7 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
             }
         }
 
-        String delete_request = "https://mercury-list-api.herokuapp.com/api/v1/items/%s";
+        String delete_request = "Enter api delete request string here";
         okHttpParser httpParser = new okHttpParser();
         String response = httpParser.delete(String.format(delete_request,String.valueOf(cardData.getId())));
         Log.d("Delete request", response);

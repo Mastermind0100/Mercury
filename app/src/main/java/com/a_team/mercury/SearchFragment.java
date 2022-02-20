@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class SearchFragment extends Fragment {
     EditText searchText;
     ImageButton button;
     List<CardData> all_card_data;
+    RecyclerView.LayoutManager layoutManager;
 
     public SearchFragment() {
     }
@@ -52,24 +54,28 @@ public class SearchFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getContext());
 
         searchText = view.findViewById(R.id.search_text);
         button = view.findViewById(R.id.search_btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String searchTextValue = searchText.getText().toString().toLowerCase(Locale.ROOT);
-                List<CardData> search_cards = new ArrayList<CardData>();
-                for(int i = 0; i < all_card_data.size(); i++) {
-                    if(all_card_data.get(i).getTitle().toLowerCase(Locale.ROOT).contains(searchTextValue)) {
-                        search_cards.add(all_card_data.get(i));
-                    }
-                }
-                CardDataAdapter cardDataAdapter = new CardDataAdapter(search_cards, getActivity());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(cardDataAdapter);
+                submitSearch();
             }
         });
+    }
+
+    private void submitSearch() {
+        String searchTextValue = searchText.getText().toString().toLowerCase(Locale.ROOT);
+        List<CardData> search_cards = new ArrayList<CardData>();
+        for(int i = 0; i < all_card_data.size(); i++) {
+            if(all_card_data.get(i).getTitle().toLowerCase(Locale.ROOT).contains(searchTextValue)) {
+                search_cards.add(all_card_data.get(i));
+            }
+        }
+        CardDataAdapter cardDataAdapter = new CardDataAdapter(search_cards, getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(cardDataAdapter);
     }
 }

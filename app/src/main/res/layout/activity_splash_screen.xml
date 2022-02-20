@@ -7,14 +7,13 @@
     android:background="@color/background"
     tools:context=".SplashScreen">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_icon"
-        android:layout_width="wrap_content"
+<!--    You can add a Lottie animation here. I opted out because I wanted a simple image -->
+
+    <ImageView
+        android:id="@+id/splash_image"
         android:layout_height="wrap_content"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="splash_screen.json"
-        app:lottie_loop="true"
-        app:lottie_speed="1"
-        android:layout_centerInParent="true"/>
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        />
 
 </RelativeLayout>

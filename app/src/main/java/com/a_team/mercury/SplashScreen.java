@@ -3,10 +3,13 @@ package com.a_team.mercury;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.orhanobut.hawk.Hawk;
 
@@ -15,19 +18,32 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SplashScreen extends AppCompatActivity {
 
-    String url_request = "https://mercury-list-api.herokuapp.com/api/v1/items";
+    String url_request = "Enter get all items url string request here";
     List<CardData> final_request_data = new ArrayList<CardData>();
+    ImageView imageView;
+    String thumbnail_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null)
+            getSupportActionBar().hide();
+
+        imageView = findViewById(R.id.splash_image);
+        try {
+            InputStream bitmap=getAssets().open("Image path from assets folder");
+            Bitmap bit= BitmapFactory.decodeStream(bitmap);
+            imageView.setImageBitmap(bit);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
         Hawk.init(this).build();
 
@@ -68,9 +84,14 @@ public class SplashScreen extends AppCompatActivity {
             String type_id = temp_jsonObject.getString("user_id");
 
             //get the thumbnail url from youtube
-            getResourceData resourceData = new getResourceData(url);
-            String thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
-            Log.d("thumb_splash", thumbnail_url);
+            if(url.contains("open.spotify.com")){
+                thumbnail_url = "spotify";
+            }
+            else{
+                getResourceData resourceData = new getResourceData(url);
+                thumbnail_url = resourceData.responseJSON.getString("thumbnail_url");
+                Log.d("thumb_splash", thumbnail_url);
+            }
             //append new object to cardData array
             CardData cardData = new CardData(id, title, url, thumbnail_url, type_id);
             final_request_data.add(cardData);
