@@ -24,7 +24,7 @@ import java.util.List;
 
 public class SplashScreen extends AppCompatActivity {
 
-    String url_request = "Enter get all items url string request here";
+    String url_request = "Enter Your URL";
     List<CardData> final_request_data = new ArrayList<CardData>();
     ImageView imageView;
     String thumbnail_url;
@@ -81,7 +81,8 @@ public class SplashScreen extends AppCompatActivity {
             int id = temp_jsonObject.getInt("id");
             String title = temp_jsonObject.getString("title");
             String url = temp_jsonObject.getString("url");
-            String type_id = temp_jsonObject.getString("user_id");
+            String type_id = temp_jsonObject.getString("value_type");
+            int watched = temp_jsonObject.getInt("watched");
 
             //get the thumbnail url from youtube
             if(url.contains("open.spotify.com")){
@@ -93,7 +94,7 @@ public class SplashScreen extends AppCompatActivity {
                 Log.d("thumb_splash", thumbnail_url);
             }
             //append new object to cardData array
-            CardData cardData = new CardData(id, title, url, thumbnail_url, type_id);
+            CardData cardData = new CardData(id, title, url, thumbnail_url, type_id, watched);
             final_request_data.add(cardData);
         }
 

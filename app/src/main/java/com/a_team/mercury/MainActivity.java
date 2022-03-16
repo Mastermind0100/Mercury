@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog dialog;
     Spinner spinner;
     List<CardData> cardDataList = new ArrayList<CardData>();
-    String post_request_url = "Enter posy url request string here";
+    String post_request_url = "Enter Your URL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 thumbnail_url = "spotify";
             }
             String title = inputTitleText;
-            CardData cardData = new CardData(20022020, title, inputUrl, thumbnail_url, spinnerSelection.toLowerCase(Locale.ROOT));
+            CardData cardData = new CardData(20022020, title, inputUrl, thumbnail_url, spinnerSelection.toLowerCase(Locale.ROOT), 0);
             cardDataList.add(cardData);
             updateServerData(cardData);
             Log.d("thumb_url", thumbnail_url);
@@ -139,10 +139,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateServerData(CardData cardData) throws JSONException, IOException {
+        int watched = 0;
+        if(cardData.getType_id().equals("song")){
+            watched = 2;
+        }
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("title", cardData.getTitle());
         jsonObject.put("url", cardData.getMain_url());
-        jsonObject.put("user_id", cardData.getType_id());
+        jsonObject.put("value_type", cardData.getType_id());
+        jsonObject.put("watched", watched);
         okHttpParser httpParser = new okHttpParser();
         String response = httpParser.post(post_request_url, jsonObject.toString());
         JSONObject response_object = new JSONObject(response);

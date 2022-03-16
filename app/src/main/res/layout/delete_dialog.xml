@@ -9,12 +9,12 @@
         android:id="@+id/delete_confirmation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete this Item?"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:fontFamily="@font/poppins_regular"
         android:layout_marginTop="20dp"
-        android:textColor="@color/background"/>
+        android:fontFamily="@font/poppins_regular"
+        android:text="Modify Item"
+        android:textColor="@color/background"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:id="@+id/buttons_container"

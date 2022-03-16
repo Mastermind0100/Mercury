@@ -21,8 +21,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingStart="10dp"
                 tools:ignore="RtlSymmetry">
+
+                <ImageView
+                    android:id="@+id/watched_color"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="0.03"/>
 
                 <TextView
                     android:id="@+id/display_text_name"
@@ -30,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_light"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.67"
                     android:text="@string/temp_name"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
@@ -41,6 +47,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:layout_weight="0.3"
+                    android:layout_marginLeft="5dp"
                     android:contentDescription="@string/thumbnail" />
 
             </LinearLayout>

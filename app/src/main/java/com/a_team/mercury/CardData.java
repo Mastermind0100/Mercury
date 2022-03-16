@@ -8,28 +8,16 @@ public class CardData {
     private String thumbnail_url;
     private String main_url;
     private String type_id;         //read as user_id from server
+    private int watched;
 
 
-    public CardData(int id, String title, String main_url, String thumbnail_url, String type_id) {
+    public CardData(int id, String title, String main_url, String thumbnail_url, String type_id, int watched) {
         this.id = id;
-        this.title = refine_title(title);
+        this.title = title;
         this.main_url = main_url;
         this.thumbnail_url = thumbnail_url;
         this.type_id = type_id;
-    }
-
-    private String refine_title(String title) {
-        String final_title = "";
-        for(int i = 0; i < title.length(); i++) {
-            if(Character.isDigit(title.charAt(i))||Character.isLetter(title.charAt(i))||title.charAt(i)==' '||title.charAt(i)=='.') {
-                final_title += title.charAt(i);
-
-            }
-            else {
-                break;
-            }
-        }
-        return final_title;
+        this.watched = watched;
     }
 
     public int getId() {
@@ -68,5 +56,13 @@ public class CardData {
 
     public void setType_id(String type_id) {
         this.type_id = type_id;
+    }
+
+    public int getWatched() {
+        return watched;
+    }
+
+    public void setWatched(int watched) {
+        this.watched = watched;
     }
 }

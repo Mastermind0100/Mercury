@@ -17,11 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.orhanobut.hawk.Hawk;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,14 +57,24 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
         holder.textViewName.setText(cardData.getTitle());
         String type_id = cardData.getType_id();
         String url = cardData.getThumbnail_url();
+        int watched = cardData.getWatched();
         if(!url.equals("spotify")){
             Glide.with(holder.itemView).load(url).into(holder.imageView);
         }
         else{
             String spotify_url = "https://i.ibb.co/HDSqkTr/spotify-logo-png-7078.png";
             Glide.with(holder.itemView).load(spotify_url).into(holder.imageView);
-
         }
+        if(watched == 0){
+            holder.watchedBorder.setBackgroundColor(ContextCompat.getColor(this.context, R.color.red));
+        }
+        else if(watched == 1){
+            holder.watchedBorder.setBackgroundColor(ContextCompat.getColor(this.context, R.color.green));
+        }
+        else{
+            holder.watchedBorder.setBackgroundColor(ContextCompat.getColor(this.context, R.color.purple_500));
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,15 +124,55 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
         });
 
         Button cancelButton = view.findViewById(R.id.cancel_button_dialog);
+        if(cardData.getWatched()==0){
+            cancelButton.setText("Mark as: Watched");
+        }
+        else if(cardData.getWatched()==1){
+            cancelButton.setText("Mark as: To Watch");
+        }
+        else{
+            cancelButton.setText("Cancel");
+        }
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    updateItem(cardData);
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                }
                 dialog.dismiss();
             }
         });
 
         dialog = builder.create();
         dialog.show();
+    }
+
+    private void updateItem(CardData cardData) throws JSONException, IOException {
+        List<CardData> cardDataList = Hawk.get("all_data");
+        int final_watched = 0;
+        for(int i = 0; i < cardDataList.size(); i++) {
+            CardData currentCard = cardDataList.get(i);
+            if(currentCard.getId() == cardData.getId()){
+                if(currentCard.getWatched()==0){
+                    currentCard.setWatched(1);
+                    final_watched = 1;
+                }
+                else if(currentCard.getWatched()==1){
+                    currentCard.setWatched(0);
+                    final_watched = 0;
+                }
+            }
+        }
+
+        String update_request = "Enter Your URL";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("watched", final_watched);
+        okHttpParser httpParser = new okHttpParser();
+        String response = httpParser.update(String.format(update_request,String.valueOf(cardData.getId())), jsonObject.toString());
+
+        Hawk.put("all_data", cardDataList);
     }
 
     private void deleteItem(CardData cardData) throws IOException {
@@ -130,7 +184,7 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
             }
         }
 
-        String delete_request = "Enter api delete request string here";
+        String delete_request = "Enter Your URL";
         okHttpParser httpParser = new okHttpParser();
         String response = httpParser.delete(String.format(delete_request,String.valueOf(cardData.getId())));
         Log.d("Delete request", response);
@@ -145,6 +199,7 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView;
+        ImageView watchedBorder;
         TextView textViewName;
         TextView textViewBody;
 
@@ -152,6 +207,7 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
             super(itemView);
             imageView = itemView.findViewById(R.id.display_image);
             textViewName = itemView.findViewById(R.id.display_text_name);
+            watchedBorder = itemView.findViewById(R.id.watched_color);
         }
     }
 }
