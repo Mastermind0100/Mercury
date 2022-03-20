@@ -24,7 +24,7 @@ import java.util.List;
 
 public class SplashScreen extends AppCompatActivity {
 
-    String url_request = "Enter Your URL";
+    String url_request = "https://api.herokuapp.com/api/v1/items";
     List<CardData> final_request_data = new ArrayList<CardData>();
     ImageView imageView;
     String thumbnail_url;
@@ -38,7 +38,7 @@ public class SplashScreen extends AppCompatActivity {
 
         imageView = findViewById(R.id.splash_image);
         try {
-            InputStream bitmap=getAssets().open("Image path from assets folder");
+            InputStream bitmap=getAssets().open("splash-screen.png");
             Bitmap bit= BitmapFactory.decodeStream(bitmap);
             imageView.setImageBitmap(bit);
         } catch (IOException e1) {

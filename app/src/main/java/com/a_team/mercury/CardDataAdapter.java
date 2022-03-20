@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -125,10 +126,10 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
 
         Button cancelButton = view.findViewById(R.id.cancel_button_dialog);
         if(cardData.getWatched()==0){
-            cancelButton.setText("Mark as: Watched");
+            cancelButton.setText("Watched");
         }
         else if(cardData.getWatched()==1){
-            cancelButton.setText("Mark as: To Watch");
+            cancelButton.setText("To Watch");
         }
         else{
             cancelButton.setText("Cancel");
@@ -166,13 +167,23 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
             }
         }
 
-        String update_request = "Enter Your URL";
+        String update_request = "https://api.herokuapp.com/api/v1/items/%s";
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("watched", final_watched);
         okHttpParser httpParser = new okHttpParser();
         String response = httpParser.update(String.format(update_request,String.valueOf(cardData.getId())), jsonObject.toString());
-
         Hawk.put("all_data", cardDataList);
+        Fragment reloadFragment;
+        if(cardData.getType_id().equals("movie")){
+            reloadFragment = new MoviesFragment();
+        }
+        else if(cardData.getType_id().equals("tvshow")){
+            reloadFragment = new TvShowsFragment();
+        }
+        else {
+            reloadFragment = new MusicFragment();
+        }
+        ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.main_container, reloadFragment).commit();
     }
 
     private void deleteItem(CardData cardData) throws IOException {
@@ -184,11 +195,22 @@ public class CardDataAdapter extends RecyclerView.Adapter<CardDataAdapter.ViewHo
             }
         }
 
-        String delete_request = "Enter Your URL";
+        String delete_request = "https://api.herokuapp.com/api/v1/items/%s";
         okHttpParser httpParser = new okHttpParser();
         String response = httpParser.delete(String.format(delete_request,String.valueOf(cardData.getId())));
         Log.d("Delete request", response);
         Hawk.put("all_data", newCardDataList);
+        Fragment reloadFragment;
+        if(cardData.getType_id().equals("movie")){
+            reloadFragment = new MoviesFragment();
+        }
+        else if(cardData.getType_id().equals("tvshow")){
+            reloadFragment = new TvShowsFragment();
+        }
+        else {
+            reloadFragment = new MusicFragment();
+        }
+        ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.main_container, reloadFragment).commit();
     }
 
     @Override

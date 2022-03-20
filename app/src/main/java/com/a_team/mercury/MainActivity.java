@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog dialog;
     Spinner spinner;
     List<CardData> cardDataList = new ArrayList<CardData>();
-    String post_request_url = "Enter Your URL";
+    String post_request_url = "https://api.herokuapp.com/api/v1/items";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String spinnerSelection = spinner.getSelectedItem().toString();
                 String inputUrl = editText.getText().toString();
+//                Log.d("fragment_type", fragment.toString().split("\\{")[0]);
                 dialog.dismiss();
                 try {
                     parseUserInput(titleText.getText().toString(), inputUrl, spinnerSelection);
@@ -158,5 +160,16 @@ public class MainActivity extends AppCompatActivity {
         List<CardData> all_data_list = Hawk.get("all_data");
         all_data_list.add(0, cardData);
         Hawk.put("all_data", all_data_list);
+        Fragment reloadFragment;
+        if(cardData.getType_id().equals("movie")){
+            reloadFragment = new MoviesFragment();
+        }
+        else if(cardData.getType_id().equals("tvshow")){
+            reloadFragment = new TvShowsFragment();
+        }
+        else {
+            reloadFragment = new MusicFragment();
+        }
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, reloadFragment).commit();
     }
 }
