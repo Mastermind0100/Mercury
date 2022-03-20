@@ -41,3 +41,7 @@ Here is a sample data point sent by the server: <br>
 <td><img width="200px" src="https://user-images.githubusercontent.com/36445600/159157110-f063f2d5-5be6-48fd-8e5b-1282488ab9c2.jpeg" /></td>
 </tr>
 </table>
+
+## License
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)<br>
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
